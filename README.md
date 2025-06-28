@@ -21,6 +21,19 @@ CivicSpotter is an intelligent crowdsourced platform that empowers citizens to r
 - **🔍 Advanced Filtering**: Filter issues by stage, city, and status
 - **📊 Real-time Status Tracking**: Monitor issue progress from submission to resolution
 
+### 📊 Analytics & Insights
+- **📈 Interactive Analytics Dashboard**: Comprehensive data visualization and insights
+- **🗺️ Geographic Mapping**: Visual representation of issue locations
+- **📅 Trend Analysis**: Time series analysis of issue reporting patterns
+- **🔥 Heatmap Visualization**: Issue type distribution by city
+- **📤 Data Export**: Download analytics data for further analysis
+
+### 🎬 Live Demo Features
+- **🎯 Interactive Demo Simulation**: Complete workflow demonstration
+- **🎭 Humorous Tweet Generation**: Engaging social media content with appropriate humor
+- **⚡ Real-time Processing**: Live simulation of the entire pipeline
+- **📊 Impact Metrics**: Processing time, accuracy, and automation statistics
+
 ## 🏗️ System Architecture
 
 ```
@@ -142,6 +155,11 @@ ADMIN_PASSWORD_HASH=your-sha256-hashed-password
    - System automatically processes approved stages
    - Monitor errors and retry failed operations
 
+4. **Analytics & Insights**
+   - Access the Analytics Dashboard for comprehensive data visualization
+   - View geographic distribution, trend analysis, and performance metrics
+   - Export data for further analysis
+
 ## 🔧 Core Components
 
 ### 📊 Issue Management (`src/manage_issue/`)
@@ -169,6 +187,18 @@ ADMIN_PASSWORD_HASH=your-sha256-hashed-password
 - Stage management and approval processing
 - Error handling and retry mechanisms
 
+### 📊 Analytics & Visualization (`pages/_3_Analytics_Dashboard.py`)
+- **Interactive Charts**: Issue distribution, trends, and geographic mapping
+- **Real-time Metrics**: Performance tracking and insights
+- **Data Export**: CSV download functionality
+- **Responsive Design**: Optimized for all screen sizes
+
+### 🎬 Live Demo (`pages/_4_Live_Demo.py`)
+- **Interactive Simulation**: Complete workflow demonstration
+- **Humorous Content**: Engaging tweet examples with appropriate humor
+- **Technical Showcase**: Architecture and feature highlights
+- **Real-time Processing**: Live simulation of the entire pipeline
+
 ## 📁 Project Structure
 
 ```
@@ -182,11 +212,16 @@ CivicSpotter/
 ├── 📁 Social_platforms/        # Social media integration
 ├── 📁 coordinator/             # Workflow orchestration
 ├── 📁 pages/                   # Streamlit UI pages
+│   ├── _1_User_Dashboard.py    # Citizen reporting interface
+│   ├── _2_Admin_Dashboard.py   # Administrative management
+│   ├── _3_Analytics_Dashboard.py # Data visualization & insights
+│   └── _4_Live_Demo.py         # Interactive demonstration
 ├── 📁 issues/                  # Issue storage
 │   ├── active/                 # Pending issues
 │   └── completed/              # Resolved issues
 ├── main.py                     # Application entry point
-└── requirements.txt            # Dependencies
+├── requirements.txt            # Dependencies
+└── HACKATHON_SUBMISSION.md     # Submission guidelines
 ```
 
 ## 🔄 Workflow Process
@@ -228,7 +263,7 @@ CivicSpotter/
 
 ### AI-Powered Content Generation
 - Context-aware email templates
-- Professional tweet composition
+- Professional tweet composition with appropriate humor
 - Authority contact discovery
 - Location-specific query generation
 
@@ -237,6 +272,33 @@ CivicSpotter/
 - Comprehensive error logging
 - Graceful degradation for missing data
 - User-friendly error messages
+
+### Analytics & Insights
+- **Interactive Visualizations**: Charts, maps, and heatmaps
+- **Trend Analysis**: Time series data and patterns
+- **Geographic Clustering**: Location-based issue analysis
+- **Performance Metrics**: System efficiency and response times
+- **Data Export**: CSV download for external analysis
+
+## 🎯 Hackathon Highlights
+
+### Technical Innovation
+- **Multi-Modal AI**: Image processing + GPS + AI content generation
+- **Smart Automation**: Authority discovery, email generation, social media posting
+- **Real-time Processing**: Live location detection and metadata extraction
+- **Intelligent Clustering**: Automatic duplicate detection and issue grouping
+
+### User Experience Excellence
+- **Mobile-First Design**: Responsive interface for all devices
+- **Intuitive Workflow**: Simple photo upload → automatic processing
+- **Real-time Feedback**: Live progress tracking and status updates
+- **Accessibility**: Works with camera or gallery uploads
+
+### Social Impact
+- **Civic Engagement**: Empowers citizens to report local issues
+- **Government Efficiency**: Streamlines issue management for authorities
+- **Transparency**: Public social media posting for accountability
+- **Scalability**: Works across multiple cities and issue types
 
 ## 🤝 Contributing
 
@@ -263,9 +325,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Twitter API** for social media integration
 - **OpenStreetMap/Nominatim** for geocoding services
 - **Tavily** for web search capabilities
+- **Plotly** for interactive data visualizations
 
 ---
 
-**Built with ❤️ for better civic engagement and community empowerment**
+<!-- Built with Bolt.new Badge -->
+<div align="center">
+    <a href="https://bolt.new" target="_blank">
+        <img src="https://img.shields.io/badge/Built%20with-Bolt.new-FF6B6B?style=for-the-badge&logo=lightning&logoColor=white" 
+             alt="Built with Bolt.new" 
+             style="border-radius: 8px; box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);">
+    </a>
+</div>
 
-*CivicSpotter - Making cities more responsive, one photo at a time.*
+<div align="center">
+    <p><strong>Built with ❤️ for better civic engagement and community empowerment</strong></p>
+    <p><em>CivicSpotter - Making cities more responsive, one photo at a time.</em></p>
+    <p>⚡ Powered by AI • 🎯 Built for Impact • 🚀 Deployed with Bolt</p>
+</div>
