@@ -31,7 +31,8 @@ st.markdown("""
 
 # Quick Stats
 col1, col2, col3, col4 = st.columns(4)
-
+os.makedirs("issues/active", exist_ok=True)
+os.makedirs("issues/completed", exist_ok=True)
 # Count issues for stats
 active_count = len([f for f in os.listdir("issues/active") if f.endswith(".json")]) if os.path.exists(
     "issues/active") else 0

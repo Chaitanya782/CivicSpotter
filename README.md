@@ -61,7 +61,7 @@ CivicSpotter is an intelligent crowdsourced platform that empowers citizens to r
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/CivicSpotter.git
+   git clone https://github.com/Chaitanya782/CivicSpotter.git
    cd CivicSpotter
    ```
 
