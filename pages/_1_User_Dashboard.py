@@ -80,7 +80,7 @@ if st.button("Submit"):
 
         # If browser GPS is available, pass it manually to override metadata fallback
         gps_metadata = None
-        if upload_mode == "📸 Take a photo now" and location and location.get("coords"):
+        if upload_mode == "📸 Take photo" and location and location.get("coords"):
             coords = location["coords"]
             now = datetime.now()
             formatted_datetime = now.strftime("%Y:%m:%d %H:%M:%S")
