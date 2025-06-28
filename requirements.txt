@@ -1,0 +1,11 @@
+exifread
+geopy
+requests
+filelock
+dotenv
+tweepy
+streamlit
+beautifulsoup4
+google-generativeai
+tavily-python
+streamlit-js-eval
