@@ -1,0 +1,53 @@
+{
+    "issue_id": "Bodrum_20250628_017",
+    "issue_type": "Pothole",
+    "image_paths": [
+        "temp_uploads/test_photo.jpg"
+    ],
+    "metadata": {
+        "latitude": 37.02995277777778,
+        "longitude": 27.41326388888889,
+        "datetime": "2018:10:18 18:16:32",
+        "Address": {
+            "road": "Osman Nuri Bilgin Caddesi",
+            "suburb": "Eski\u00e7e\u015fme",
+            "postcode": "48440",
+            "country": "Turkey",
+            "country_code": "tr",
+            "city": "Bodrum"
+        }
+    },
+    "status": "tweet_review",
+    "admin_stage": "tweet_review",
+    "stage": "stage_1",
+    "approvals": {
+        "metadata_review": true,
+        "authority_review": true,
+        "tweet_review": true
+    },
+    "Authority_info": {
+        "Name": null,
+        "Email": {
+            "Main": "info@bodrum.bel.tr",
+            "CC": "None",
+            "Higher Authority": "None"
+        },
+        "Department": null
+    },
+    "tweet": {
+        "status": "completed",
+        "text": "Pothole alert in Bodrum! \ud83e\udd15\ud83d\udea7 Looks like our street is getting a new 'rustic' feel. Sent full details incl. image & location to city authorities via email. Hoping for a quick fix! #CivicIssue #UrbanIndia #SmartCity #Bodrum",
+        "url": "https://twitter.com/user/status/1938943066154639658"
+    },
+    "email": {
+        "status": "Completed",
+        "timestamp": "2025-06-28 18:14:07.819078"
+    },
+    "stored": false,
+    "history": [],
+    "errors": {},
+    "similar_to": null,
+    "already_reported": null,
+    "similar_count": 0,
+    "similar_image_paths": []
+}
