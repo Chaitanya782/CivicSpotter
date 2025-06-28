@@ -166,7 +166,7 @@ class TheBrain():
                     # Move the file
                     os.rename(source_path, destination_path)
 
-                self.issue_handler.update_issue(state)
+                # self.issue_handler.update_issue(state)
                 # self.do_stage_work(issue_id)
                 # Workaround do it manually later will change
 

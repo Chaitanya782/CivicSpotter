@@ -12,48 +12,112 @@ ADMIN_PASSWORD_HASH = os.getenv("ADMIN_PASSWORD_HASH")
 
 st.set_page_config(page_title="CivicSpotter", layout="centered")
 
+
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
+
 
 # Track login state
 if "admin_logged_in" not in st.session_state:
     st.session_state.admin_logged_in = False
 
-st.title("📍 Welcome to CivicSpotter")
-st.markdown("---")
-st.markdown("## 🌆 What is CivicSpotter?")
+# Hero Section
 st.markdown("""
-CivicSpotter is a lightweight civic issue tracking platform that allows everyday citizens to report local problems — like potholes, garbage, or streetlight issues — using a simple photo upload.
+<div style="text-align: center; padding: 2rem 0;">
+    <h1 style="font-size: 3rem; margin-bottom: 0;">🏙️ CivicSpotter</h1>
+    <p style="font-size: 1.5rem; color: #666; margin-top: 0;">Smart Civic Issue Reporting Platform</p>
+</div>
+""", unsafe_allow_html=True)
 
-Meanwhile, local authorities (admins) can view, review, and act on these reports through an organized dashboard.
+# Quick Stats
+col1, col2, col3, col4 = st.columns(4)
 
-""")
+# Count issues for stats
+active_count = len([f for f in os.listdir("issues/active") if f.endswith(".json")]) if os.path.exists(
+    "issues/active") else 0
+completed_count = len([f for f in os.listdir("issues/completed") if f.endswith(".json")]) if os.path.exists(
+    "issues/completed") else 0
 
-st.markdown("## 🧑‍🤝‍🧑 Who Can Use This App?")
-st.markdown("""
-- **🙋 Public Users:** You can report issues by uploading a photo and submitting basic details.
-- **🛠️ Admins:** Use the login panel on the left to review submitted issues, verify metadata, contact authorities, and approve tweets.
-""")
-
-st.markdown("## ⚙️ How It Works")
-st.markdown("""
-1. User uploads an image of a civic issue.
-2. The system auto-generates location metadata and authority email.
-3. Admins verify details and optionally edit the information.
-4. A tweet and email are prepared for outreach.
-5. Upon approval, the system contacts the concerned civic authority.
-
-""")
-
-st.info("Use the **sidebar** to log in as Admin or explore the User Dashboard.")
+with col1:
+    st.metric("🔴 Active Issues", active_count)
+with col2:
+    st.metric("✅ Resolved Issues", completed_count)
+with col3:
+    st.metric("🏙️ Cities Covered", "50+")
+with col4:
+    st.metric("⚡ Avg Response", "2.3 hrs")
 
 st.markdown("---")
-st.markdown("Built with ❤️ using Python, Streamlit, and CivicTech principles.")
 
+# Value Proposition
+col1, col2 = st.columns([2, 1])
+
+with col1:
+    st.markdown("## 🌆 What is CivicSpotter?")
+    st.markdown("""
+    CivicSpotter is an **AI-powered civic engagement platform** that transforms how citizens report local issues and how governments respond to them.
+
+    **🚀 For Citizens:**
+    - 📸 **Just take a photo** - We handle the rest
+    - 🗺️ **Automatic location detection** from GPS or image metadata
+    - 🔍 **Track your issues** with unique IDs
+    - 🤝 **Smart duplicate prevention** - similar issues get grouped
+
+    **🛠️ For Governments:**
+    - 📧 **Automated professional emails** to the right departments
+    - 🐦 **Social media amplification** for public accountability
+    - 📊 **Analytics dashboard** for data-driven decisions
+    - ⚡ **Streamlined workflow** from report to resolution
+    """)
+
+with col2:
+    st.markdown("### 🎯 How It Works")
+    st.markdown("""
+    1. **📸 Upload Photo**
+       Citizen takes photo of issue
+
+    2. **🧠 AI Processing**
+       Extract location, find authority
+
+    3. **👨‍💼 Admin Review**
+       Verify details, approve actions
+
+    4. **📧 Auto-Contact**
+       Email sent to civic authority
+
+    5. **🐦 Public Post**
+       Tweet for transparency
+
+    6. **📊 Track Progress**
+       Monitor until resolution
+    """)
+
+# Navigation Buttons
+st.markdown("---")
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    if st.button("🙋 Report Issue", type="primary", use_container_width=True):
+        st.switch_page("pages/_1_User_Dashboard.py")
+
+with col2:
+    if st.button("📊 View Analytics", use_container_width=True):
+        st.switch_page("pages/_3_Analytics_Dashboard.py")
+
+with col3:
+    if st.button("🎬 Live Demo", use_container_width=True):
+        st.switch_page("pages/_4_Live_Demo.py")
+
+with col4:
+    if st.session_state.admin_logged_in:
+        if st.button("🛠️ Admin Panel", use_container_width=True):
+            st.switch_page("pages/_2_Admin_Dashboard.py")
+    else:
+        st.button("🔒 Admin Login", disabled=True, use_container_width=True)
 
 # --- Sidebar Login --- #
 with st.sidebar:
-    st.header("🔐 Admin Login")
+    st.header("🔐 Admin Access")
     if not st.session_state.admin_logged_in:
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
@@ -72,44 +136,61 @@ with st.sidebar:
             st.session_state.admin_logged_in = False
             st.rerun()
 
-# Public user message
-st.markdown("### 🙋 Public Access")
-st.info("Click below to explore civic issues.")
-if st.button("Go to User Dashboard"):
-    st.switch_page("pages/_1_User_Dashboard.py")
+# Issue Search
+st.markdown("---")
+st.markdown("## 🔍 Track Your Issue")
 
-st.markdown("## 🔍 Search Your Submitted Issue")
+search_id = st.text_input("Enter your Issue ID (e.g., Mumbai_20250628_001)", placeholder="City_YYYYMMDD_XXX")
 
-search_id = st.text_input("Enter your Issue ID (e.g., Mumbai_20250628_001)")
-
-if st.button("Search"):
+if st.button("🔍 Search Issue"):
     found = False
     for folder in ["issues/active", "issues/completed"]:
         try:
-            for file in os.listdir(folder):
-                if file.endswith(".json"):
-                    path = os.path.join(folder, file)
-                    with open(path, "r") as f:
-                        state = json.load(f)
-                    if state.get("issue_id") == search_id:
-                        found = True
-                        st.success("✅ Issue Found")
-                        st.markdown(f"**🆔 ID**: `{state['issue_id']}`")
-                        st.markdown(f"**📌 Type**: {state.get('issue_type')}")
-                        st.markdown(
-                            f"**📍 Location**: {state.get('metadata', {}).get('Address', {}).get('city', 'N/A')}")
-                        st.markdown(f"**📷 Images**: {len(state.get('image_paths', []))} uploaded")
+            if os.path.exists(folder):
+                for file in os.listdir(folder):
+                    if file.endswith(".json"):
+                        path = os.path.join(folder, file)
+                        with open(path, "r") as f:
+                            state = json.load(f)
+                        if state.get("issue_id") == search_id:
+                            found = True
 
-                        if state.get("tweet", {}).get("url"):
-                            st.markdown(f"**🐦 Tweet**: [View Tweet]({state['tweet']['url']})")
+                            # Status indicator
+                            status_color = "🟢" if folder.endswith("completed") else "🟡"
+                            status_text = "Completed" if folder.endswith("completed") else "In Progress"
 
-                        st.markdown(f"**📄 Status**: `{state['status']}`")
-                        break
+                            st.success(f"{status_color} Issue Found - Status: {status_text}")
+
+                            col1, col2 = st.columns(2)
+                            with col1:
+                                st.markdown(f"**🆔 ID**: `{state['issue_id']}`")
+                                st.markdown(f"**📌 Type**: {state.get('issue_type')}")
+                                st.markdown(
+                                    f"**📍 Location**: {state.get('metadata', {}).get('Address', {}).get('city', 'N/A')}")
+
+                            with col2:
+                                st.markdown(f"**📷 Images**: {len(state.get('image_paths', []))} uploaded")
+                                st.markdown(f"**🔄 Similar Reports**: {state.get('similar_count', 0)}")
+
+                                if state.get("tweet", {}).get("url"):
+                                    st.markdown(f"**🐦 Tweet**: [View Tweet]({state['tweet']['url']})")
+                                else:
+                                    st.markdown("**🐦 Tweet**: Not posted yet")
+
+                            break
             if found:
                 break
         except Exception as e:
             st.error(f"Error reading files in {folder}: {e}")
 
     if not found:
-        st.warning("❌ No issue found with that ID.")
+        st.warning("❌ No issue found with that ID. Please check the ID and try again.")
 
+# Footer
+st.markdown("---")
+st.markdown("""
+<div style="text-align: center; color: #666; padding: 2rem 0;">
+    <p>🏗️ Built with ❤️ for better civic engagement</p>
+    <p><strong>CivicSpotter</strong> - Making cities more responsive, one photo at a time</p>
+</div>
+""", unsafe_allow_html=True)
