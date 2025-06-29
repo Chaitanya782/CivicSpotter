@@ -38,14 +38,12 @@ def Email_template(state):
         <p>
           Sincerely,<br>
           <strong>CivicSpotter System</strong><br>
-          <span style="font-size: 12px; color: #666;">[_________________________]</span>
+          
         </p>
 
         <hr style="margin-top: 30px;">
 
-        <p><em>📎 Attached Photo Evidence:</em></p>
-        <img src="cid:issue_photo" alt="Issue Photo" width="400" style="border: 1px solid #ddd; padding: 4px;" />
-      </body>
+        </body>
     </html>
     """
 
