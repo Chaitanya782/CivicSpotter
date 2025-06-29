@@ -78,12 +78,22 @@ if filtered_issues:
             city = st.text_input("City", value=address.get("city", ""))
             state_name = st.text_input("State", value=address.get("state", ""))
             submitted = st.form_submit_button("💾 Save Metadata")
+
             if submitted:
                 selected_state.update({"issue_type": issue_type})
                 selected_state["metadata"]["Address"].update({"road": road, "city": city, "state": state_name})
                 brain.issue_handler.update_issue(selected_state)
                 st.success("Metadata updated!")
                 st.rerun()
+
+        if st.button("❌ Reject this issue"):
+            selected_state.update({"status": "rejected"})
+            issue_id=selected_state["issue_id"]
+            source_path = f"issues/active/{issue_id}.json"
+            destination_path = f"issues/rejected/{issue_id}.json"
+            # Move the file
+            os.rename(source_path, destination_path)
+            st.rerun()
 
 
     elif stage == "authority_review":
@@ -158,6 +168,8 @@ if filtered_issues:
         brain.process_pending_approvals()
         st.success(f"Approved stage: {stage} and processed next step.")
         st.rerun()
+
+
 
     # Option to view full JSON
     with st.expander("📦 See Full Issue JSON"):

@@ -49,7 +49,7 @@ class Email_notifier():
         #     img.add_header("Content-Disposition", "inline", filename="evidence.jpg")
         #     msg.attach(img)
 
-        max_images = 3
+        max_images = 5
         for i, image_path in enumerate(image_paths[:min(len(image_paths), max_images)]):
             with open(image_path, "rb") as img_file:
                 img = MIMEImage(img_file.read())

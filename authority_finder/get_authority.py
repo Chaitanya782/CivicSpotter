@@ -81,11 +81,12 @@ class Authority_Finder():
 
         return content_blocks
 
-    def find_mail(self, content):
+    def find_mail(self, content, issue_type):
 
         prompt = f"""
                 Extract the most likely **official email addresses** from the following text.
                 The emails should belong to a **civic authority, municipal department, or government contact** responsible for the reported issue.
+                Make sure that person is responsible for {issue_type} issue.
 
                 If multiple relevant emails are found, categorize them clearly as:
                 - Main: Primary contact to send the email to
@@ -133,9 +134,9 @@ class Authority_Finder():
 
         # If your WebCrawler is working correctly and source['content'] is text
         combined_content = "\n\n".join(pages)  # assuming list of strings
-
+        issue_type=state["issue_type"]
         print("\n📬 Finding email from content...")
-        mail_string=self.find_mail(combined_content)
+        mail_string=self.find_mail(combined_content, issue_type)
         return self.extract_email_dict(mail_string)
 
 

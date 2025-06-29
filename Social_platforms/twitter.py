@@ -37,6 +37,7 @@ class Social_Handles():
         # country = address.get("country", "Unknown country")
         # date = Metadata.get("datetime", "Unknown date").split(" ")[0]
         # issue_id = state.get("issue_id", "unknown_id")
+        similar_issue = state["similar_count"]
 
         prompt = f"""
                 You are generating a tweet to report a civic issue to the city municipality.
@@ -48,6 +49,7 @@ class Social_Handles():
                 - Report Date: {state.get("metadata", {}).get("datetime", "Unknown date").split(" ")[0]}
                 - Issue ID: {state.get("issue_id", "unknown_id")}
                 - Address: {state.get("metadata", {}).get("Address", {})}
+                - Similar issue reported nearby: {state.get("similar_count", 0)}
                 - Submitted via photo
                 - Email sent to: {state.get("Authority_info", {}).get("Email", "authority@example.com")}
 
@@ -78,6 +80,7 @@ class Social_Handles():
         tweet_text=state['tweet']['text']
         tweet_status={'status': 'pending', 'text': tweet_text, 'url': None}
         image_paths = state.get("image_paths")
+
         # for image_path in image_paths:
         #     if not os.path.exists(image_path):
         #         print("❌ Image path is invalid or file does not exist:", image_paths)

@@ -2,6 +2,7 @@ def Email_template(state):
     issue_id=state["issue_id"]
     issue_type = state["issue_type"]
     Address=state["metadata"]["Address"]
+    similar_issue=state["similar_count"]
     Subject=f"Civic Issue Report – {issue_id} – {Address['city']}"
     Body = f"""
     <html>
@@ -16,6 +17,7 @@ def Email_template(state):
         <ul>
           <li><strong>🔹 Issue ID:</strong> {issue_id}</li>
           <li><strong>🔹 Issue type:</strong> {issue_type}</li>
+          <li><strong>🔹 Similar issue reported nearby:</strong> {similar_issue}</li>
           <li><strong>📍 Location:</strong> {Address.get('road', 'N/A')}, {Address.get('suburb', 'N/A')}, {Address.get('city', 'N/A')}, {Address.get('postcode', 'N/A')}, {Address.get('country', 'N/A')}</li>
           <li><strong>📅 Date Reported:</strong> {state['metadata'].get('datetime', 'Unknown')}</li>
           <li><strong>🌐 Coordinates:</strong> Latitude {state['metadata'].get('latitude', 'N/A')}, Longitude {state['metadata'].get('longitude', 'N/A')}</li>

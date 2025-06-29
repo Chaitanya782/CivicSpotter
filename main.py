@@ -33,6 +33,7 @@ st.markdown("""
 col1, col2, col3, col4 = st.columns(4)
 os.makedirs("issues/active", exist_ok=True)
 os.makedirs("issues/completed", exist_ok=True)
+os.makedirs("issues/rejected", exist_ok=True)
 # Count issues for stats
 active_count = len([f for f in os.listdir("issues/active") if f.endswith(".json")]) if os.path.exists(
     "issues/active") else 0
@@ -145,7 +146,7 @@ search_id = st.text_input("Enter your Issue ID (e.g., Mumbai_20250628_001)", pla
 
 if st.button("🔍 Search Issue"):
     found = False
-    for folder in ["issues/active", "issues/completed"]:
+    for folder in ["issues/active", "issues/completed", "issues/rejected"]:
         try:
             if os.path.exists(folder):
                 for file in os.listdir(folder):
@@ -157,8 +158,12 @@ if st.button("🔍 Search Issue"):
                             found = True
 
                             # Status indicator
-                            status_color = "🟢" if folder.endswith("completed") else "🟡"
-                            status_text = "Completed" if folder.endswith("completed") else "In Progress"
+                            # status_color = "🟢" if folder.endswith("completed") else "🟡"
+                            # status_text = "Completed" if folder.endswith("completed") else "In Progress"
+                            status_color = "🟢" if folder.endswith("completed") else "🔴" if folder.endswith(
+                                "rejected") else "🟡"
+                            status_text = "Completed" if folder.endswith(
+                                "completed") else "Rejected by Admin" if folder.endswith("rejected") else "In Progress"
 
                             st.success(f"{status_color} Issue Found - Status: {status_text}")
 
