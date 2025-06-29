@@ -112,3 +112,22 @@ if st.button("Submit"):
             except Exception as e:
                 st.warning("⚠️ Could not load location on map.")
                 st.text(f"Error: {e}")
+
+
+# Footer
+
+st.markdown("---", unsafe_allow_html=True)
+
+st.markdown("""
+<div style="margin: 2rem 0; text-align: center;">
+    <a href="https://bolt.new" target="_blank" style="text-decoration: none;">
+        <img src="https://img.shields.io/badge/Built%20with-Bolt.new-FF6B6B?style=for-the-badge&logo=thunderstorm&logoColor=white" 
+             alt="Built with Bolt.new" 
+             style="border-radius: 8px; box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3); height: 40px;">
+    </a>
+</div>
+
+<p style="margin-top: 1rem; font-size: 0.9rem; color: #888; font-style: italic; text-align: center;">
+    ⚡ Powered by AI • 🎯 Built for Impact • 🚀 Deployed with Bolt
+</p>
+""", unsafe_allow_html=True)
